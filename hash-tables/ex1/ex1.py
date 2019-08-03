@@ -8,6 +8,16 @@ from hashtables import (HashTable,
 
 def get_indices_of_item_weights(weights, length, limit):
     ht = HashTable(16)
+    for x in range(length):
+        hash_table_insert(ht, weights[x], x)
+    for i in weights:
+        for j in weights:
+            if hash_table_retrieve(ht, limit-weights[i]) is not None:
+                if weights[i] < weights[j]:
+                    answer = (j, i)
+                else: 
+                    answer = (i, j)
+            return answer
 
     """
     YOUR CODE HERE
