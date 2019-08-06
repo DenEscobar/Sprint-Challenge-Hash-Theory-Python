@@ -7,29 +7,21 @@ from hashtables import (HashTable,
 
 
 def get_indices_of_item_weights(weights, length, limit):
-    answer = ()
+    answer = None
     ht = HashTable(16)
-    print("length", len(weights))
     for x in range(len(weights)):
-        print("index", x)
-        print("value", weights[x])
         hash_table_insert(ht, weights[x], x)
     for i in range(len(weights)):
-        for j in range(i, len(weights)):
-            if hash_table_retrieve(ht, limit-weights[j]) is not None:
-                print("in table", hash_table_retrieve(ht, limit-weights[j]))
-                if weights[i] < weights[j]:
-                    answer = (j, i)
-                else: 
-                    answer = (i, j)
-            print(answer)
-            return answer
+        if hash_table_retrieve(ht, limit-weights[i]) is not None:
+            value = hash_table_retrieve(ht, limit-weights[i])
+            if i < value:
+                answer = (value, i)
+            else: 
+                answer = (i, value)
+            return answer 
+    return answer
 
-    """
-    YOUR CODE HERE
-    """
 
-    return None
 
 
 def print_answer(answer):
